@@ -1,3 +1,4 @@
 <?php
-echo '<h2>' . $posts_item['title'] . '</h2>';
-echo $posts_item['description'];
+echo var_dump($post);
+echo '<h2>' . $post['title'] . '</h2>';
+echo $post['description'];

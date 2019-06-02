@@ -25,21 +25,21 @@ class Posts extends CI_Controller
 
   # Function for particular post item
 
-  //   public function view($slug = NULL)
-  //   {
-  //     $data['posts_item'] = $this->post->get_posts($slug);
+  public function view($id = FALSE)
+  {
+    $data['post'] = $this->post->get_posts($id);
 
 
-  //     if (empty($data['posts_item'])) {
-  //       show_404();
-  //     }
+    if (empty($data['post'])) {
+      show_404();
+    }
 
-  //     $data['title'] = $data['posts_item']['title'];
+    $data['title'] = $data['post']['title'];
 
-  //     $this->load->view('templates/header', $data);
-  //     $this->load->view('posts/view', $data);
-  //     $this->load->view('templates/footer');
-  //   }
+    $this->load->view('templates/header', $data);
+    $this->load->view('posts/view', $data);
+    $this->load->view('templates/footer');
+  }
 
   public function create()
   {
