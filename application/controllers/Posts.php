@@ -17,7 +17,6 @@ class Posts extends CI_Controller
     $this->output->enable_profiler(TRUE);
     $this->output->cache(10);
     $data['posts'] = $this->post->get_posts();
-    $data['categories'] = $this->category->get_categories();
     $data['title'] = 'Your posts';
     $this->load->view('templates/header', $data);
     $this->load->view('posts/index', $data);
@@ -53,6 +52,8 @@ class Posts extends CI_Controller
     #
     $data['title'] = 'Create a new post';
     $data['css'] = ['createpost'];
+    $data['categories'] = $this->category->get_categories();
+
     # Set some rules
 
     #set_rules takes three arguments

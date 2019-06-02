@@ -12,6 +12,7 @@ class Post extends CI_Model
   public function get_posts($slug = FALSE)
   {
     if ($slug === FALSE) {
+      $this->db->order_by('created_at', 'DESC');
       $query = $this->db->get('post');
       return $query->result_array();
     }
