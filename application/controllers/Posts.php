@@ -2,6 +2,7 @@
 
 class Posts extends CI_Controller
 {
+
   public function __construct()
   {
     parent::__construct();
@@ -11,12 +12,25 @@ class Posts extends CI_Controller
     $this->load->helper('url_helper');
   }
 
-  # Default data needed to load? Default is All Post items
-  public function index()
+  # Default data needed to load? Default is paginated
+  public function index($page = NULL)
   {
-    $this->output->enable_profiler(TRUE);
-    $this->output->cache(10);
-    $data['posts'] = $this->post->get_posts();
+    $this->load->library('pagination');
+    $config = [
+      'base_url' => base_url() . 'posts',
+      'total_rows' => $this->post->get_count(),
+      'per_page' => 10
+    ];
+    $this->pagination->initialize($config);
+
+    if (isset($page)) {
+      $data['posts'] = $this->post->get_posts_by_page($config['per_page'], $page); // Is this correct?
+    } else {
+      $data['posts'] = $this->post->get_posts_by_page($config['per_page'], 0); // No offset
+    }
+    // $this->output->enable_profiler(TRUE);
+    // $this->output->cache(10);
+    $data['links'] = $this->pagination->create_links();
     $data['title'] = 'Your posts';
     $this->load->view('templates/header', $data);
     $this->load->view('posts/index', $data);

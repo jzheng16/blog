@@ -35,4 +35,20 @@ class Post extends CI_Model
 
     return $this->db->insert('post', $data);
   }
+
+  public function get_count()
+  {
+    return $this->db->count_all('post');
+  }
+
+  public function get_posts_by_page($limit = NULL, $offset = NULL)
+  {
+    $result = [];
+    if (isset($limit) && isset($offset)) {
+      $this->db->limit($limit, $offset);
+      $query = $this->db->get('post');
+      $result = $query->result_array();
+    }
+    return $result;
+  }
 }

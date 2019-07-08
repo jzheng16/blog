@@ -10,6 +10,7 @@
         <p class="post-description"> <?= $post['description']; ?> </p>
       </section>
     <?php endforeach; ?>
+    <?= $links ?>
   </section>
 
 </main>
