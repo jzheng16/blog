@@ -58,7 +58,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 
 $route['posts/create'] = 'posts/create';
-$route['posts/(:any)'] = 'posts/view/$1';
+$route['post/(:any)'] = 'posts/view/$1';
+$route['posts/(:any)'] = 'posts/index/$1';
 $route['posts'] = 'posts';
 #:any is a wildcard and will map to 'pages/view/$1'
 $route['(:any)'] = 'pages/view/$1';

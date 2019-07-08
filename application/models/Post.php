@@ -9,14 +9,15 @@ class Post extends CI_Model
   }
 
   # Slug is automatically sanitized for you by QueryBuilder
-  public function get_posts($slug = FALSE)
+  public function get_posts($id = FALSE)
   {
-    if ($slug === FALSE) {
+    if ($id === FALSE) {
+      $this->db->order_by('created_at', 'DESC');
       $query = $this->db->get('post');
       return $query->result_array();
     }
 
-    $query = $this->db->get_where('post', ['slug' => $slug]);
+    $query = $this->db->get_where('post', ['id' => $id]);
     return $query->row_array();
   }
 
@@ -33,5 +34,21 @@ class Post extends CI_Model
     ];
 
     return $this->db->insert('post', $data);
+  }
+
+  public function get_count()
+  {
+    return $this->db->count_all('post');
+  }
+
+  public function get_posts_by_page($limit = NULL, $offset = NULL)
+  {
+    $result = [];
+    if (isset($limit) && isset($offset)) {
+      $this->db->limit($limit, $offset);
+      $query = $this->db->get('post');
+      $result = $query->result_array();
+    }
+    return $result;
   }
 }

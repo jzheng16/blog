@@ -1,10 +1,12 @@
-<h2><?php echo $title; ?></h2>
-
 <?php echo validation_errors(); ?>
 
 <?php
-# form_open provided by codeigniter helps do a 
-echo form_open('posts/create'); ?>
+# form_open provided by codeigniter has extra functionality ? read: https://www.codeigniter.com/user_guide/tutorial/create_news_items.html
+$options = [
+  'id' => 'create-post-form'
+];
+
+echo form_open('posts/create', $options); ?>
 
 <h2> Create your own post </h2>
 <input name="title" type="text" id="title" placeholder="Enter Title" />
